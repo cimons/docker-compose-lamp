@@ -31,7 +31,7 @@ RUN docker-php-ext-enable redis
 # Other PHP7 Extensions
 
 RUN apt-get -y install libsqlite3-dev libsqlite3-0 mysql-client
-RUN docker-php-ext-install pdo_mysql 
+RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install pdo_sqlite
 RUN docker-php-ext-install mysqli
 
@@ -49,7 +49,7 @@ RUN docker-php-ext-install mbstring
 RUN docker-php-ext-install gettext
 
 RUN apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ 
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install -j$(nproc) gd
 
 # Enable apache modules
@@ -61,3 +61,13 @@ RUN curl -o ioncube.tar.gz http://downloads3.ioncube.com/loader_downloads/ioncub
     && mv ioncube/ioncube_loader_lin_7.2.so `php-config --extension-dir` \
     && rm -Rf ioncube.tar.gz ioncube \
     && docker-php-ext-enable ioncube_loader_lin_7.2
+
+# Letsencrypt
+RUN apt-get -y install software-properties-common \
+    && apt-get -y install software-properties-common \
+    && add-apt-repository -y ppa:certbot/certbot \
+    && apt-get -y install certbot python-certbot-apache
+
+#vim
+RUN apt-get -y install vim
+
