@@ -3,5 +3,6 @@
 /config/*
 /data/*
 /logs/*
+/ssl/*
 /www/**
 .DS_Store
